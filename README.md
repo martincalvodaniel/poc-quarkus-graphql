@@ -1,8 +1,19 @@
 # poc-quarkus-graphql Project
 
+Proof of concept of a graphql api which queries an in-memory H2 database populated at startup.
+
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+
+## Available Queries
+
+* query{findAuthors{authors{id name country}}}
+* query{findAuthor(id: 1){id name country}}
+* query{findBooks{books{id author title summary}}}
+* query{findBook(id: 1){id author title summary}}
+
+http://localhost:8080/q/graphql-ui
 
 ## Running the application in dev mode
 
@@ -30,22 +41,6 @@ If you want to build an _über-jar_, execute the following command:
 ```
 
 The application, packaged as an _über-jar_, is now runnable using `java -jar build/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using: 
-```shell script
-./gradlew build -Dquarkus.package.type=native
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./build/poc-quarkus-graphql-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/gradle-tooling.
 
 ## Related Guides
 
