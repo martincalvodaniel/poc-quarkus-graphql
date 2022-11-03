@@ -13,7 +13,7 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 * query{findBooks{books{id author title summary}}}
 * query{findBook(id: 1){id author title summary}}
 
-http://localhost:8080/q/graphql-ui
+Once the application has been started, the GraphQL api can be queried here: http://localhost:8080/q/graphql-ui
 
 ## Running the application in dev mode
 
@@ -46,12 +46,5 @@ The application, packaged as an _über-jar_, is now runnable using `java -jar bu
 
 - JDBC Driver - H2 ([guide](https://quarkus.io/guides/datasource)): Connect to the H2 database via JDBC
 - Kotlin ([guide](https://quarkus.io/guides/kotlin)): Write your services in Kotlin
-- SmallRye GraphQL ([guide](https://quarkus.io/guides/microprofile-graphql)): Create GraphQL Endpoints using the code-first approach from MicroProfile GraphQL
-
-## Provided Code
-
-### SmallRye GraphQL
-
-Start coding with this Hello GraphQL Query
-
-[Related guide section...](https://quarkus.io/guides/smallrye-graphql)
+- SmallRye GraphQL ([guide](https://quarkus.io/guides/microprofile-graphql)): Create GraphQL Endpoints using the
+code-first approach from MicroProfile GraphQL
