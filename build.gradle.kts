@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.7.20"
-    kotlin("plugin.allopen") version "1.7.20"
+    kotlin("jvm") version "1.7.21"
+    kotlin("plugin.allopen") version "1.7.21"
     id("io.quarkus")
 }
 
@@ -14,7 +14,7 @@ val quarkusPlatformArtifactId: String by project
 val quarkusPlatformVersion: String by project
 
 dependencies {
-    implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
+    implementation(enforcedPlatform("$quarkusPlatformGroupId:$quarkusPlatformArtifactId:$quarkusPlatformVersion"))
     implementation("io.quarkus:quarkus-hibernate-orm-panache-kotlin")
     implementation("io.quarkus:quarkus-jdbc-h2")
     implementation("io.quarkus:quarkus-kotlin")
