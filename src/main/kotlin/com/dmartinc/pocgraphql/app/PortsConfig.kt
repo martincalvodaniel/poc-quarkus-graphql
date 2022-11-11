@@ -2,6 +2,7 @@ package com.dmartinc.pocgraphql.app
 
 import com.dmartinc.pocgraphql.core.ports.AuthorByIdRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorsRetriever
+import com.dmartinc.pocgraphql.core.ports.AuthorsStore
 import com.dmartinc.pocgraphql.core.ports.BookByIdRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksByAuthorRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksRetriever
@@ -26,6 +27,10 @@ class PortsConfig {
     @Produces
     @DefaultBean
     fun authorsRetriever(): AuthorsRetriever = panacheAuthorsRepository
+
+    @Produces
+    @DefaultBean
+    fun authorsStore(): AuthorsStore = panacheAuthorsRepository
 
     @Produces
     @DefaultBean

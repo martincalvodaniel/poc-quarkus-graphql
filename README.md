@@ -10,6 +10,7 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 ```
 # query{findAuthors{authors{id name country books{id author title summary}}}}
 # query{findAuthor(id: 1){id name country books{id author title summary}}}}
+# mutation{createAuthor(author:{id: 4, name:"name", country:"country"})}
 # query{findBooks{books{id author title summary}}}
 # query{findBook(id: 1){id author title summary}}
 # mutation{createBook(book:{id: 6, author:1, title:"title", summary:"summary"})}
