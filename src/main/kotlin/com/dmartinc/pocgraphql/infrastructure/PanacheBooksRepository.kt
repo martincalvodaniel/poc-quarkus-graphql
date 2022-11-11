@@ -6,7 +6,7 @@ import com.dmartinc.pocgraphql.core.ports.BookByIdRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksByAuthorRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksStore
-import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepository
+import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepositoryBase
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -16,14 +16,15 @@ class PanacheBooksRepository :
     BooksByAuthorRetriever,
     BooksRetriever,
     BooksStore,
-    PanacheRepository<PanacheBooksRepository.BookEntity> {
+    PanacheRepositoryBase<PanacheBooksRepository.BookEntity, Int> {
 
-    override fun retrieve(bookId: Int): Book? = find("id", bookId).firstResult()?.toDomain()
+    override fun retrieve(bookId: Int): Book? = findById(bookId)?.toDomain()
 
-    override fun retrieve(author: Author): List<Book> =
-        find("author", author.id).stream().map { it.toDomain() }.toList()
+    override fun retrieve(author: Author): List<Book> = list("author", author.id).map { it.toDomain() }.toList()
 
-    override fun retrieve(): List<Book> = findAll().stream().map { it.toDomain() }.toList()
+    override fun retrieve(): List<Book> = listAll().map { it.toDomain() }.toList()
+
+    override fun store(book: Book) = persistAndFlush(BookEntity.fromDomain(book))
 
     @Entity(name = "BOOK")
     class BookEntity {
@@ -51,9 +52,5 @@ class PanacheBooksRepository :
         }
 
         fun toDomain() = Book(id!!, author!!, title, summary)
-    }
-
-    override fun store(book: Book) {
-        persistAndFlush(BookEntity.fromDomain(book))
     }
 }

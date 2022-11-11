@@ -14,7 +14,7 @@ class PanacheAuthorsRepository :
 
     override fun retrieve(id: Int): Author? = findById(id)?.toDomain()
 
-    override fun retrieve(): List<Author> = findAll().stream().map { it.toDomain() }.toList()
+    override fun retrieve(): List<Author> = listAll().map { it.toDomain() }.toList()
 
     @Entity(name = "AUTHOR")
     class AuthorEntity {
