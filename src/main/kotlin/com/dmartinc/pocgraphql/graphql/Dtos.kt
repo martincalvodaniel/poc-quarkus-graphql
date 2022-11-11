@@ -3,9 +3,10 @@ package com.dmartinc.pocgraphql.graphql
 import com.dmartinc.pocgraphql.core.Author
 import com.dmartinc.pocgraphql.core.Book
 
-data class AuthorDto(val id: Int, val name: String, val country: String) {
+data class AuthorDto(val id: Int, val name: String, val country: String, val books: List<BookDto>) {
     companion object {
-        fun fromDomain(author: Author) = AuthorDto(author.id, author.name, author.country)
+        fun fromDomain(author: Author) =
+            AuthorDto(author.id, author.name, author.country, author.books.map { BookDto.fromDomain(it) })
     }
 }
 

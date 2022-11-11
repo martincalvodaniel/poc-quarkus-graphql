@@ -1,15 +1,24 @@
 package com.dmartinc.pocgraphql.infrastructure
 
 import com.dmartinc.pocgraphql.core.Book
+import com.dmartinc.pocgraphql.core.ports.BookByIdRetriever
+import com.dmartinc.pocgraphql.core.ports.BooksByAuthorIdRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksRetriever
-import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepositoryBase
+import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepository
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
 
-class PanacheBooksRetriever : BooksRetriever, PanacheRepositoryBase<PanacheBooksRetriever.BookEntity, Int> {
+class PanacheBooksRetriever :
+    BookByIdRetriever,
+    BooksByAuthorIdRetriever,
+    BooksRetriever,
+    PanacheRepository<PanacheBooksRetriever.BookEntity> {
 
-    override fun retrieve(id: Int): Book? = findById(id)?.toDomain()
+    override fun retrieve(bookId: Int): Book? = find("id", bookId).firstResult()?.toDomain()
+
+    override fun retrieveByAuthorId(authorId: Int): List<Book> =
+        find("author", authorId).stream().map { it.toDomain() }.toList()
 
     override fun retrieve(): List<Book> = findAll().stream().map { it.toDomain() }.toList()
 

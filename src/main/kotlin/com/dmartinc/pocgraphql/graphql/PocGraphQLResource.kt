@@ -1,34 +1,34 @@
 package com.dmartinc.pocgraphql.graphql
 
-import com.dmartinc.pocgraphql.core.ports.AuthorsRetriever
-import com.dmartinc.pocgraphql.core.ports.BooksRetriever
+import com.dmartinc.pocgraphql.core.usecases.queries.FindAuthor
+import com.dmartinc.pocgraphql.core.usecases.queries.FindAuthors
+import com.dmartinc.pocgraphql.core.usecases.queries.FindBook
+import com.dmartinc.pocgraphql.core.usecases.queries.FindBooks
 import org.eclipse.microprofile.graphql.Description
 import org.eclipse.microprofile.graphql.GraphQLApi
 import org.eclipse.microprofile.graphql.Query
 
 @GraphQLApi
 class PocGraphQLResource(
-    private val authorsRetriever: AuthorsRetriever,
-    private val booksRetriever: BooksRetriever
+    private val findAuthor: FindAuthor,
+    private val findAuthors: FindAuthors,
+    private val findBook: FindBook,
+    private val findBooks: FindBooks
 ) {
 
     @Query
     @Description("Find Author")
-    fun findAuthor(id: Int): AuthorDto = authorsRetriever.retrieve(id)
-        ?.let { AuthorDto.fromDomain(it) }
-        ?: throw AuthorNotFound()
+    fun findAuthor(id: Int): AuthorDto = findAuthor.query(id).let { AuthorDto.fromDomain(it) }
 
     @Query
     @Description("Find Authors")
-    fun findAuthors(): AuthorsDto = AuthorsDto.fromDomain(authorsRetriever.retrieve())
+    fun findAuthors(): AuthorsDto = AuthorsDto.fromDomain(findAuthors.query())
 
     @Query
     @Description("Find Book")
-    fun findBook(id: Int): BookDto = booksRetriever.retrieve(id)
-        ?.let { BookDto.fromDomain(it) }
-        ?: throw BookNotFound()
+    fun findBook(id: Int): BookDto = findBook.query(id).let { BookDto.fromDomain(it) }
 
     @Query
     @Description("Find Books")
-    fun findBooks(): BooksDto = BooksDto.fromDomain(booksRetriever.retrieve())
+    fun findBooks(): BooksDto = BooksDto.fromDomain(findBooks.query())
 }

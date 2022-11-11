@@ -7,11 +7,12 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
 ## Available Queries
-
-* query{findAuthors{authors{id name country}}}
-* query{findAuthor(id: 1){id name country}}
-* query{findBooks{books{id author title summary}}}
-* query{findBook(id: 1){id author title summary}}
+```
+# query{findAuthors{authors{id name country books{id author title summary}}}}
+# query{findAuthor(id: 1){id name country books{id author title summary}}}}
+# query{findBooks{books{id author title summary}}}
+# query{findBook(id: 1){id author title summary}}
+```
 
 Once the application has been started, the GraphQL api can be queried here: http://localhost:8080/q/graphql-ui
 

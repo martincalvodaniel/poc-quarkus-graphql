@@ -1,12 +1,16 @@
 package com.dmartinc.pocgraphql.infrastructure
 
 import com.dmartinc.pocgraphql.core.Author
+import com.dmartinc.pocgraphql.core.ports.AuthorByIdRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorsRetriever
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepositoryBase
 import javax.persistence.Entity
 import javax.persistence.Id
 
-class PanacheAuthorsRetriever : AuthorsRetriever, PanacheRepositoryBase<PanacheAuthorsRetriever.AuthorEntity, Int> {
+class PanacheAuthorsRetriever :
+    AuthorsRetriever,
+    AuthorByIdRetriever,
+    PanacheRepositoryBase<PanacheAuthorsRetriever.AuthorEntity, Int> {
 
     override fun retrieve(id: Int): Author? = findById(id)?.toDomain()
 
@@ -18,6 +22,6 @@ class PanacheAuthorsRetriever : AuthorsRetriever, PanacheRepositoryBase<PanacheA
         lateinit var name: String
         lateinit var country: String
 
-        fun toDomain() = Author(id!!, name, country)
+        fun toDomain() = Author(id!!, name, country, emptyList())
     }
 }
