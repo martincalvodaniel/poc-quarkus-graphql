@@ -5,8 +5,9 @@ import com.dmartinc.pocgraphql.core.ports.AuthorsRetriever
 import com.dmartinc.pocgraphql.core.ports.BookByIdRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksByAuthorRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksRetriever
-import com.dmartinc.pocgraphql.infrastructure.PanacheAuthorsRetriever
-import com.dmartinc.pocgraphql.infrastructure.PanacheBooksRetriever
+import com.dmartinc.pocgraphql.core.ports.BooksStore
+import com.dmartinc.pocgraphql.infrastructure.PanacheAuthorsRepository
+import com.dmartinc.pocgraphql.infrastructure.PanacheBooksRepository
 import io.quarkus.arc.DefaultBean
 import javax.enterprise.context.Dependent
 import javax.enterprise.inject.Produces
@@ -14,27 +15,31 @@ import javax.enterprise.inject.Produces
 @Dependent
 class PortsConfig {
 
-    private val panacheAuthorsRetriever = PanacheAuthorsRetriever()
+    private val panacheAuthorsRepository = PanacheAuthorsRepository()
 
-    private val panacheBooksRetriever = PanacheBooksRetriever()
-
-    @Produces
-    @DefaultBean
-    fun authorByIdRetriever(): AuthorByIdRetriever = panacheAuthorsRetriever
+    private val panacheBooksRepository = PanacheBooksRepository()
 
     @Produces
     @DefaultBean
-    fun authorsRetriever(): AuthorsRetriever = panacheAuthorsRetriever
+    fun authorByIdRetriever(): AuthorByIdRetriever = panacheAuthorsRepository
 
     @Produces
     @DefaultBean
-    fun bookByIdRetriever(): BookByIdRetriever = panacheBooksRetriever
+    fun authorsRetriever(): AuthorsRetriever = panacheAuthorsRepository
 
     @Produces
     @DefaultBean
-    fun booksByAuthorIdRetriever(): BooksByAuthorRetriever = panacheBooksRetriever
+    fun bookByIdRetriever(): BookByIdRetriever = panacheBooksRepository
 
     @Produces
     @DefaultBean
-    fun booksRetriever(): BooksRetriever = panacheBooksRetriever
+    fun booksByAuthorIdRetriever(): BooksByAuthorRetriever = panacheBooksRepository
+
+    @Produces
+    @DefaultBean
+    fun booksRetriever(): BooksRetriever = panacheBooksRepository
+
+    @Produces
+    @DefaultBean
+    fun booksStore(): BooksStore = panacheBooksRepository
 }

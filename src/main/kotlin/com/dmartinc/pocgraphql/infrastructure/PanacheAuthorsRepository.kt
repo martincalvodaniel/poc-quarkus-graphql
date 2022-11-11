@@ -7,10 +7,10 @@ import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepositoryBase
 import javax.persistence.Entity
 import javax.persistence.Id
 
-class PanacheAuthorsRetriever :
+class PanacheAuthorsRepository :
     AuthorsRetriever,
     AuthorByIdRetriever,
-    PanacheRepositoryBase<PanacheAuthorsRetriever.AuthorEntity, Int> {
+    PanacheRepositoryBase<PanacheAuthorsRepository.AuthorEntity, Int> {
 
     override fun retrieve(id: Int): Author? = findById(id)?.toDomain()
 

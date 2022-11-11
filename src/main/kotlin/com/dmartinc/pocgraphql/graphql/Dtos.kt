@@ -32,6 +32,8 @@ data class BookDto(
 ) {
     constructor() : this(null)
 
+    fun toDomain() = Book(id!!, author!!, title!!, summary!!)
+
     companion object {
         fun fromDomain(book: Book) = BookDto(book.id, book.author, book.title, book.summary)
     }

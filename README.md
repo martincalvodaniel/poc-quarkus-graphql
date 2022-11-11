@@ -12,6 +12,7 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 # query{findAuthor(id: 1){id name country books{id author title summary}}}}
 # query{findBooks{books{id author title summary}}}
 # query{findBook(id: 1){id author title summary}}
+# mutation{createBook(book:{id: 6, author:1, title:"title", summary:"summary"})}
 ```
 
 Once the application has been started, the GraphQL api can be queried here: http://localhost:8080/q/graphql-ui

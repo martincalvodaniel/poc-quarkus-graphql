@@ -5,6 +5,8 @@ import com.dmartinc.pocgraphql.core.ports.AuthorsRetriever
 import com.dmartinc.pocgraphql.core.ports.BookByIdRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksByAuthorRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksRetriever
+import com.dmartinc.pocgraphql.core.ports.BooksStore
+import com.dmartinc.pocgraphql.core.usecases.actions.CreateBook
 import com.dmartinc.pocgraphql.core.usecases.queries.FindAuthor
 import com.dmartinc.pocgraphql.core.usecases.queries.FindAuthors
 import com.dmartinc.pocgraphql.core.usecases.queries.FindBook
@@ -20,7 +22,8 @@ class UseCasesConfig(
     private val authorsRetriever: AuthorsRetriever,
     private val bookByIdRetriever: BookByIdRetriever,
     private val booksByAuthorRetriever: BooksByAuthorRetriever,
-    private val booksRetriever: BooksRetriever
+    private val booksRetriever: BooksRetriever,
+    private val booksStore: BooksStore
 ) {
 
     @Produces
@@ -42,4 +45,8 @@ class UseCasesConfig(
     @Produces
     @DefaultBean
     fun findBooksByAuthor(): FindBooksByAuthor = FindBooksByAuthor(booksByAuthorRetriever)
+
+    @Produces
+    @DefaultBean
+    fun createBook(): CreateBook = CreateBook(booksStore)
 }
