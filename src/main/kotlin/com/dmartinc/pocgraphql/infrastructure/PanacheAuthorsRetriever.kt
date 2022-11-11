@@ -22,6 +22,6 @@ class PanacheAuthorsRetriever :
         lateinit var name: String
         lateinit var country: String
 
-        fun toDomain() = Author(id!!, name, country, emptyList())
+        fun toDomain() = Author(id!!, name, country)
     }
 }
