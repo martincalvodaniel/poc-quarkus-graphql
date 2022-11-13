@@ -1,7 +1,6 @@
-package com.dmartinc.pocgraphql.infrastructure
+package com.dmartinc.pocgraphql.infrastructure.panache
 
 import com.dmartinc.pocgraphql.core.Author
-import com.dmartinc.pocgraphql.core.Book
 import com.dmartinc.pocgraphql.core.ports.AuthorByIdRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorsRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorsStore

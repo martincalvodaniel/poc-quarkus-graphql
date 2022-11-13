@@ -1,4 +1,4 @@
-package com.dmartinc.pocgraphql.infrastructure
+package com.dmartinc.pocgraphql.infrastructure.panache
 
 import com.dmartinc.pocgraphql.core.Author
 import com.dmartinc.pocgraphql.core.Book
