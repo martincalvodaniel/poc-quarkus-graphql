@@ -1,7 +1,7 @@
 package com.dmartinc.pocgraphql.infrastructure.adapters.`in`.rest
 
 import com.dmartinc.pocgraphql.core.usecases.actions.CreateBook
-import com.dmartinc.pocgraphql.core.usecases.queries.FindBooksByAuthorId
+import com.dmartinc.pocgraphql.core.usecases.queries.FindBooks
 import javax.transaction.Transactional
 import javax.ws.rs.GET
 import javax.ws.rs.POST
@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response
 @Path("/authors/{authorId}/books")
 class AuthorBooksRestResource(
     private val createBook: CreateBook,
-    private val findBooksByAuthorId: FindBooksByAuthorId
+    private val findBooks: FindBooks
 ) {
 
     @Transactional
@@ -27,5 +27,5 @@ class AuthorBooksRestResource(
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     fun findBooksByAuthorId(@PathParam("authorId") authorId: Int): BooksByAuthorIdDto =
-        BooksByAuthorIdDto.fromDomain(findBooksByAuthorId.query(authorId))
+        BooksByAuthorIdDto.fromDomain(findBooks.query(authorId))
 }

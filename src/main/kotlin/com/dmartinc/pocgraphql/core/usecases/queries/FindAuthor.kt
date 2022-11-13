@@ -2,11 +2,11 @@ package com.dmartinc.pocgraphql.core.usecases.queries
 
 import com.dmartinc.pocgraphql.core.Author
 import com.dmartinc.pocgraphql.core.AuthorNotFound
-import com.dmartinc.pocgraphql.core.ports.AuthorByIdRetriever
+import com.dmartinc.pocgraphql.core.ports.AuthorRetriever
 
-class FindAuthor(private val authorByIdRetriever: AuthorByIdRetriever) {
+class FindAuthor(private val authorRetriever: AuthorRetriever) {
 
     fun query(authorId: Int): Author =
-        authorByIdRetriever.retrieve(authorId)
+        authorRetriever.retrieve(authorId)
             ?: throw AuthorNotFound(authorId)
 }

@@ -2,7 +2,7 @@ package com.dmartinc.pocgraphql.infrastructure.adapters.out.mongo
 
 import com.dmartinc.pocgraphql.core.Author
 import com.dmartinc.pocgraphql.core.Utils.NOT_YET_IMPLEMENTED
-import com.dmartinc.pocgraphql.core.ports.AuthorByIdRetriever
+import com.dmartinc.pocgraphql.core.ports.AuthorRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorRemover
 import com.dmartinc.pocgraphql.core.ports.AuthorsRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorsStore
@@ -10,7 +10,7 @@ import com.dmartinc.pocgraphql.core.ports.AuthorsStore
 class MongoAuthorsRepository :
     AuthorRemover,
     AuthorsRetriever,
-    AuthorByIdRetriever,
+    AuthorRetriever,
     AuthorsStore {
 
     override fun remove(id: Int): Boolean {

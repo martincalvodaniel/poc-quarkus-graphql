@@ -1,7 +1,7 @@
 package com.dmartinc.pocgraphql.infrastructure.adapters.out.panache
 
 import com.dmartinc.pocgraphql.core.Author
-import com.dmartinc.pocgraphql.core.ports.AuthorByIdRetriever
+import com.dmartinc.pocgraphql.core.ports.AuthorRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorRemover
 import com.dmartinc.pocgraphql.core.ports.AuthorsRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorsStore
@@ -12,7 +12,7 @@ import javax.persistence.Id
 class PanacheAuthorsRepository :
     AuthorRemover,
     AuthorsRetriever,
-    AuthorByIdRetriever,
+    AuthorRetriever,
     AuthorsStore,
     PanacheRepositoryBase<PanacheAuthorsRepository.AuthorEntity, Int> {
 

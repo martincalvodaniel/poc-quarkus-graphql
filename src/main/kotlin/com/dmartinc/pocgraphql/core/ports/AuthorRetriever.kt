@@ -2,6 +2,6 @@ package com.dmartinc.pocgraphql.core.ports
 
 import com.dmartinc.pocgraphql.core.Author
 
-interface AuthorByIdRetriever {
+interface AuthorRetriever {
     fun retrieve(id: Int): Author?
 }
