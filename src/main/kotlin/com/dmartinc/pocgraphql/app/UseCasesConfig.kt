@@ -1,14 +1,18 @@
 package com.dmartinc.pocgraphql.app
 
 import com.dmartinc.pocgraphql.core.ports.AuthorByIdRetriever
+import com.dmartinc.pocgraphql.core.ports.AuthorRemover
 import com.dmartinc.pocgraphql.core.ports.AuthorsRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorsStore
 import com.dmartinc.pocgraphql.core.ports.BookByIdRetriever
+import com.dmartinc.pocgraphql.core.ports.BookRemover
 import com.dmartinc.pocgraphql.core.ports.BooksByAuthorIdRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksStore
 import com.dmartinc.pocgraphql.core.usecases.actions.CreateAuthor
 import com.dmartinc.pocgraphql.core.usecases.actions.CreateBook
+import com.dmartinc.pocgraphql.core.usecases.actions.DeleteAuthor
+import com.dmartinc.pocgraphql.core.usecases.actions.DeleteBook
 import com.dmartinc.pocgraphql.core.usecases.queries.FindAuthor
 import com.dmartinc.pocgraphql.core.usecases.queries.FindAuthors
 import com.dmartinc.pocgraphql.core.usecases.queries.FindBook
@@ -21,10 +25,12 @@ import javax.enterprise.inject.Produces
 @Dependent
 class UseCasesConfig(
     private val authorByIdRetriever: AuthorByIdRetriever,
+    private val authorRemover: AuthorRemover,
     private val authorsRetriever: AuthorsRetriever,
     private val authorsStore: AuthorsStore,
     private val bookByIdRetriever: BookByIdRetriever,
     private val booksByAuthorIdRetriever: BooksByAuthorIdRetriever,
+    private val bookRemover: BookRemover,
     private val booksRetriever: BooksRetriever,
     private val booksStore: BooksStore
 ) {
@@ -35,15 +41,23 @@ class UseCasesConfig(
 
     @Produces
     @DefaultBean
+    fun createBook(): CreateBook = CreateBook(booksStore)
+
+    @Produces
+    @DefaultBean
+    fun deleteAuthor(): DeleteAuthor = DeleteAuthor(authorRemover)
+
+    @Produces
+    @DefaultBean
+    fun deleteBook(): DeleteBook = DeleteBook(bookRemover)
+
+    @Produces
+    @DefaultBean
     fun findAuthor(): FindAuthor = FindAuthor(authorByIdRetriever)
 
     @Produces
     @DefaultBean
     fun findAuthors(): FindAuthors = FindAuthors(authorsRetriever)
-
-    @Produces
-    @DefaultBean
-    fun createBook(): CreateBook = CreateBook(booksStore)
 
     @Produces
     @DefaultBean

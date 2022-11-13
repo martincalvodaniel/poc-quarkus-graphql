@@ -8,5 +8,5 @@ class FindBook(private val bookByIdRetriever: BookByIdRetriever) {
 
     fun query(bookId: Int): Book =
         bookByIdRetriever.retrieveOne(bookId)
-            ?: throw BookNotFound()
+            ?: throw BookNotFound(bookId)
 }

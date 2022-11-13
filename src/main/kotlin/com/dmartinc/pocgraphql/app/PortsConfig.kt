@@ -1,10 +1,12 @@
 package com.dmartinc.pocgraphql.app
 
 import com.dmartinc.pocgraphql.core.ports.AuthorByIdRetriever
+import com.dmartinc.pocgraphql.core.ports.AuthorRemover
 import com.dmartinc.pocgraphql.core.ports.AuthorsRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorsStore
 import com.dmartinc.pocgraphql.core.ports.BookByIdRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksByAuthorIdRetriever
+import com.dmartinc.pocgraphql.core.ports.BookRemover
 import com.dmartinc.pocgraphql.core.ports.BooksRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksStore
 import com.dmartinc.pocgraphql.infrastructure.adapters.out.panache.PanacheAuthorsRepository
@@ -26,6 +28,10 @@ class PortsConfig {
 
     @Produces
     @DefaultBean
+    fun authorRemover(): AuthorRemover = panacheAuthorsRepository
+
+    @Produces
+    @DefaultBean
     fun authorsRetriever(): AuthorsRetriever = panacheAuthorsRepository
 
     @Produces
@@ -39,6 +45,10 @@ class PortsConfig {
     @Produces
     @DefaultBean
     fun booksByAuthorIdRetriever(): BooksByAuthorIdRetriever = panacheBooksRepository
+
+    @Produces
+    @DefaultBean
+    fun bookRemover(): BookRemover = panacheBooksRepository
 
     @Produces
     @DefaultBean

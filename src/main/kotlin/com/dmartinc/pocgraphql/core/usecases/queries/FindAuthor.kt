@@ -8,5 +8,5 @@ class FindAuthor(private val authorByIdRetriever: AuthorByIdRetriever) {
 
     fun query(authorId: Int): Author =
         authorByIdRetriever.retrieve(authorId)
-            ?: throw AuthorNotFound()
+            ?: throw AuthorNotFound(authorId)
 }

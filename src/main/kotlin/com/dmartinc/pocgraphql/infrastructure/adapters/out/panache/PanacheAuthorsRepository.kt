@@ -2,6 +2,7 @@ package com.dmartinc.pocgraphql.infrastructure.adapters.out.panache
 
 import com.dmartinc.pocgraphql.core.Author
 import com.dmartinc.pocgraphql.core.ports.AuthorByIdRetriever
+import com.dmartinc.pocgraphql.core.ports.AuthorRemover
 import com.dmartinc.pocgraphql.core.ports.AuthorsRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorsStore
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepositoryBase
@@ -9,14 +10,17 @@ import javax.persistence.Entity
 import javax.persistence.Id
 
 class PanacheAuthorsRepository :
+    AuthorRemover,
     AuthorsRetriever,
     AuthorByIdRetriever,
     AuthorsStore,
     PanacheRepositoryBase<PanacheAuthorsRepository.AuthorEntity, Int> {
 
-    override fun retrieve(id: Int): Author? = findById(id)?.toDomain()
+    override fun remove(id: Int) = deleteById(id)
 
-    override fun retrieve(): List<Author> = listAll().map { it.toDomain() }.toList()
+    override fun retrieve(id: Int) = findById(id)?.toDomain()
+
+    override fun retrieve() = listAll().map { it.toDomain() }.toList()
 
     override fun store(author: Author) = persistAndFlush(AuthorEntity.fromDomain(author))
 

@@ -1,6 +1,7 @@
 package com.dmartinc.pocgraphql.infrastructure.adapters.`in`.graphql
 
 import com.dmartinc.pocgraphql.core.usecases.actions.CreateBook
+import com.dmartinc.pocgraphql.core.usecases.actions.DeleteBook
 import com.dmartinc.pocgraphql.core.usecases.queries.FindBook
 import com.dmartinc.pocgraphql.core.usecases.queries.FindBooks
 import com.dmartinc.pocgraphql.core.usecases.queries.FindBooksByAuthorId
@@ -13,6 +14,7 @@ import javax.transaction.Transactional
 @GraphQLApi
 class BooksGraphQLResource(
     private val createBook: CreateBook,
+    private val deleteBook: DeleteBook,
     private val findBook: FindBook,
     private val findBooks: FindBooks,
     private val findBooksByAuthorId: FindBooksByAuthorId
@@ -22,6 +24,13 @@ class BooksGraphQLResource(
     @Mutation
     fun createBook(book: BookDto): Boolean {
         createBook.execute(book.toDomain())
+        return true
+    }
+
+    @Transactional
+    @Mutation
+    fun deleteBook(id: Int): Boolean {
+        deleteBook.execute(id)
         return true
     }
 
