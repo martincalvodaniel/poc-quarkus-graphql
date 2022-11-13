@@ -1,4 +1,4 @@
-package com.dmartinc.pocgraphql.graphql
+package com.dmartinc.pocgraphql.core
 
 import io.smallrye.graphql.api.ErrorCode
 

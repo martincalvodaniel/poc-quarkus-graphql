@@ -1,8 +1,8 @@
 package com.dmartinc.pocgraphql.core.usecases.queries
 
 import com.dmartinc.pocgraphql.core.Book
+import com.dmartinc.pocgraphql.core.BookNotFound
 import com.dmartinc.pocgraphql.core.ports.BookByIdRetriever
-import com.dmartinc.pocgraphql.graphql.BookNotFound
 
 class FindBook(private val bookByIdRetriever: BookByIdRetriever) {
 
