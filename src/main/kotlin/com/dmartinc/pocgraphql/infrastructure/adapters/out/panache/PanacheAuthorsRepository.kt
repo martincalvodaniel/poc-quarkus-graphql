@@ -1,4 +1,4 @@
-package com.dmartinc.pocgraphql.infrastructure.panache
+package com.dmartinc.pocgraphql.infrastructure.adapters.out.panache
 
 import com.dmartinc.pocgraphql.core.Author
 import com.dmartinc.pocgraphql.core.ports.AuthorByIdRetriever

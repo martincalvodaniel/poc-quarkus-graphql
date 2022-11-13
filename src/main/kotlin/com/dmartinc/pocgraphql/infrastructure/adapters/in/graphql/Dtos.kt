@@ -1,4 +1,4 @@
-package com.dmartinc.pocgraphql.graphql
+package com.dmartinc.pocgraphql.infrastructure.adapters.`in`.graphql
 
 import com.dmartinc.pocgraphql.core.Author
 import com.dmartinc.pocgraphql.core.Book

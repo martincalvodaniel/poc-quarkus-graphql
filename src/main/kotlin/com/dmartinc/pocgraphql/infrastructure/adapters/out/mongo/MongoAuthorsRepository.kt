@@ -1,4 +1,4 @@
-package com.dmartinc.pocgraphql.infrastructure.mongo
+package com.dmartinc.pocgraphql.infrastructure.adapters.out.mongo
 
 import com.dmartinc.pocgraphql.core.Author
 import com.dmartinc.pocgraphql.core.ports.AuthorByIdRetriever

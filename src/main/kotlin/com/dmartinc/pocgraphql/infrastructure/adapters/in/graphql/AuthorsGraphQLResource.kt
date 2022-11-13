@@ -1,4 +1,4 @@
-package com.dmartinc.pocgraphql.graphql
+package com.dmartinc.pocgraphql.infrastructure.adapters.`in`.graphql
 
 import com.dmartinc.pocgraphql.core.usecases.actions.CreateAuthor
 import com.dmartinc.pocgraphql.core.usecases.queries.FindAuthor

@@ -1,4 +1,4 @@
-package com.dmartinc.pocgraphql.graphql
+package com.dmartinc.pocgraphql.infrastructure.adapters.`in`.graphql
 
 import com.dmartinc.pocgraphql.core.usecases.actions.CreateBook
 import com.dmartinc.pocgraphql.core.usecases.queries.FindBook

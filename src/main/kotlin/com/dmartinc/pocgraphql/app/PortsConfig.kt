@@ -7,8 +7,8 @@ import com.dmartinc.pocgraphql.core.ports.BookByIdRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksByAuthorRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksStore
-import com.dmartinc.pocgraphql.infrastructure.panache.PanacheAuthorsRepository
-import com.dmartinc.pocgraphql.infrastructure.panache.PanacheBooksRepository
+import com.dmartinc.pocgraphql.infrastructure.adapters.out.panache.PanacheAuthorsRepository
+import com.dmartinc.pocgraphql.infrastructure.adapters.out.panache.PanacheBooksRepository
 import io.quarkus.arc.DefaultBean
 import javax.enterprise.context.Dependent
 import javax.enterprise.inject.Produces
