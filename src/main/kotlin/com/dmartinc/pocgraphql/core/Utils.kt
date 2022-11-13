@@ -8,4 +8,6 @@ object Utils {
     inline fun <reified T> T.logger(): Logger {
         return LoggerFactory.getLogger(T::class.java)
     }
+
+    const val NOT_YET_IMPLEMENTED = "Not yet implemented"
 }

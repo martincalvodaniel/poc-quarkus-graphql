@@ -1,22 +1,27 @@
 package com.dmartinc.pocgraphql.infrastructure.adapters.out.mongo
 
 import com.dmartinc.pocgraphql.core.Author
+import com.dmartinc.pocgraphql.core.Utils.NOT_YET_IMPLEMENTED
 import com.dmartinc.pocgraphql.core.ports.AuthorByIdRetriever
+import com.dmartinc.pocgraphql.core.ports.AuthorRemover
 import com.dmartinc.pocgraphql.core.ports.AuthorsRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorsStore
 
-private const val NOT_YET_IMPLEMENTED = "Not yet implemented"
-
 class MongoAuthorsRepository :
+    AuthorRemover,
     AuthorsRetriever,
     AuthorByIdRetriever,
     AuthorsStore {
 
-    override fun retrieve(id: Int): Author? {
+    override fun remove(id: Int): Boolean {
         TODO(NOT_YET_IMPLEMENTED)
     }
 
     override fun retrieve(): List<Author> {
+        TODO(NOT_YET_IMPLEMENTED)
+    }
+
+    override fun retrieve(id: Int): Author? {
         TODO(NOT_YET_IMPLEMENTED)
     }
 

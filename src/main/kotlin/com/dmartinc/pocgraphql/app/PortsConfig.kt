@@ -5,56 +5,27 @@ import com.dmartinc.pocgraphql.core.ports.AuthorRemover
 import com.dmartinc.pocgraphql.core.ports.AuthorsRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorsStore
 import com.dmartinc.pocgraphql.core.ports.BookByIdRetriever
-import com.dmartinc.pocgraphql.core.ports.BooksByAuthorIdRetriever
 import com.dmartinc.pocgraphql.core.ports.BookRemover
+import com.dmartinc.pocgraphql.core.ports.BooksByAuthorIdRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksStore
-import com.dmartinc.pocgraphql.infrastructure.adapters.out.panache.PanacheAuthorsRepository
-import com.dmartinc.pocgraphql.infrastructure.adapters.out.panache.PanacheBooksRepository
-import io.quarkus.arc.DefaultBean
-import javax.enterprise.context.Dependent
-import javax.enterprise.inject.Produces
 
-@Dependent
-class PortsConfig {
+interface PortsConfig {
+    fun authorByIdRetriever(): AuthorByIdRetriever
 
-    private val panacheAuthorsRepository = PanacheAuthorsRepository()
+    fun authorRemover(): AuthorRemover
 
-    private val panacheBooksRepository = PanacheBooksRepository()
+    fun authorsRetriever(): AuthorsRetriever
 
-    @Produces
-    @DefaultBean
-    fun authorByIdRetriever(): AuthorByIdRetriever = panacheAuthorsRepository
+    fun authorsStore(): AuthorsStore
 
-    @Produces
-    @DefaultBean
-    fun authorRemover(): AuthorRemover = panacheAuthorsRepository
+    fun bookByIdRetriever(): BookByIdRetriever
 
-    @Produces
-    @DefaultBean
-    fun authorsRetriever(): AuthorsRetriever = panacheAuthorsRepository
+    fun booksByAuthorIdRetriever(): BooksByAuthorIdRetriever
 
-    @Produces
-    @DefaultBean
-    fun authorsStore(): AuthorsStore = panacheAuthorsRepository
+    fun bookRemover(): BookRemover
 
-    @Produces
-    @DefaultBean
-    fun bookByIdRetriever(): BookByIdRetriever = panacheBooksRepository
+    fun booksRetriever(): BooksRetriever
 
-    @Produces
-    @DefaultBean
-    fun booksByAuthorIdRetriever(): BooksByAuthorIdRetriever = panacheBooksRepository
-
-    @Produces
-    @DefaultBean
-    fun bookRemover(): BookRemover = panacheBooksRepository
-
-    @Produces
-    @DefaultBean
-    fun booksRetriever(): BooksRetriever = panacheBooksRepository
-
-    @Produces
-    @DefaultBean
-    fun booksStore(): BooksStore = panacheBooksRepository
+    fun booksStore(): BooksStore
 }
