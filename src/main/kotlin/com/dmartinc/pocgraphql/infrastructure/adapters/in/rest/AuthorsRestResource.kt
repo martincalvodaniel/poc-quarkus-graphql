@@ -1,8 +1,8 @@
 package com.dmartinc.pocgraphql.infrastructure.adapters.`in`.rest
 
 import com.dmartinc.pocgraphql.core.usecases.actions.CreateAuthor
-import com.dmartinc.pocgraphql.core.usecases.queries.FindAuthorAndBooks
-import com.dmartinc.pocgraphql.core.usecases.queries.FindAuthorsAndBooks
+import com.dmartinc.pocgraphql.core.usecases.queries.FindAuthor
+import com.dmartinc.pocgraphql.core.usecases.queries.FindAuthors
 import javax.transaction.Transactional
 import javax.ws.rs.GET
 import javax.ws.rs.POST
@@ -15,8 +15,8 @@ import javax.ws.rs.core.Response
 @Path("/authors")
 class AuthorsRestResource(
     private val createAuthor: CreateAuthor,
-    private val findAuthorAndBooks: FindAuthorAndBooks,
-    private val findAuthorsAndBooks: FindAuthorsAndBooks
+    private val findAuthor: FindAuthor,
+    private val findAuthors: FindAuthors
 ) {
 
     @Transactional
@@ -29,15 +29,9 @@ class AuthorsRestResource(
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    fun findAuthor(@PathParam("id") id: Int): AuthorDto {
-        val authorAndBooks = findAuthorAndBooks.query(id)
-        return AuthorDto.fromDomain(authorAndBooks)
-    }
+    fun findAuthor(@PathParam("id") id: Int): AuthorWithoutIdDto = AuthorWithoutIdDto.fromDomain(findAuthor.query(id))
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    fun findAuthors(): AuthorsDto {
-        val authorsAndBooks = findAuthorsAndBooks.query()
-        return AuthorsDto.fromDomain(authorsAndBooks)
-    }
+    fun findAuthors(): AuthorsDto = AuthorsDto.fromDomain(findAuthors.query())
 }

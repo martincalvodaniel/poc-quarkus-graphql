@@ -3,7 +3,7 @@ package com.dmartinc.pocgraphql.infrastructure.adapters.`in`.graphql
 import com.dmartinc.pocgraphql.core.usecases.actions.CreateBook
 import com.dmartinc.pocgraphql.core.usecases.queries.FindBook
 import com.dmartinc.pocgraphql.core.usecases.queries.FindBooks
-import com.dmartinc.pocgraphql.core.usecases.queries.FindBooksByAuthor
+import com.dmartinc.pocgraphql.core.usecases.queries.FindBooksByAuthorId
 import org.eclipse.microprofile.graphql.GraphQLApi
 import org.eclipse.microprofile.graphql.Mutation
 import org.eclipse.microprofile.graphql.Query
@@ -15,7 +15,7 @@ class BooksGraphQLResource(
     private val createBook: CreateBook,
     private val findBook: FindBook,
     private val findBooks: FindBooks,
-    private val findBooksByAuthor: FindBooksByAuthor
+    private val findBooksByAuthorId: FindBooksByAuthorId
 ) {
 
     @Transactional
@@ -33,5 +33,5 @@ class BooksGraphQLResource(
 
     @Query("books")
     fun findBooksForAuthor(@Source authorDto: AuthorDto): List<BookDto> =
-        findBooksByAuthor.query(authorDto.toDomain()).map { BookDto.fromDomain(it) }
+        findBooksByAuthorId.query(authorDto.id!!).map { BookDto.fromDomain(it) }
 }

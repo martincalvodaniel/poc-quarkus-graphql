@@ -7,6 +7,6 @@ import com.dmartinc.pocgraphql.core.ports.BookByIdRetriever
 class FindBook(private val bookByIdRetriever: BookByIdRetriever) {
 
     fun query(bookId: Int): Book =
-        bookByIdRetriever.retrieve(bookId)
+        bookByIdRetriever.retrieveOne(bookId)
             ?: throw BookNotFound()
 }
