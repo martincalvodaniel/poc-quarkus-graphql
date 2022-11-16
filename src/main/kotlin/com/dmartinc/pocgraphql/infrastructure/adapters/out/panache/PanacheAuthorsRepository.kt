@@ -5,8 +5,10 @@ import com.dmartinc.pocgraphql.core.ports.AuthorRemover
 import com.dmartinc.pocgraphql.core.ports.AuthorRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorsRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorsStore
-import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepositoryBase
+import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepository
 import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
 import javax.persistence.Id
 
 class PanacheAuthorsRepository :
@@ -14,11 +16,11 @@ class PanacheAuthorsRepository :
     AuthorsRetriever,
     AuthorRetriever,
     AuthorsStore,
-    PanacheRepositoryBase<PanacheAuthorsRepository.AuthorEntity, String> {
+    PanacheRepository<PanacheAuthorsRepository.AuthorEntity> {
 
-    override fun remove(id: String) = deleteById(id)
+    override fun remove(id: String) = deleteById(id.toLong())
 
-    override fun retrieve(id: String) = findById(id)?.toDomain()
+    override fun retrieve(id: String) = findById(id.toLong())?.toDomain()
 
     override fun retrieve() = listAll().map { it.toDomain() }.toList()
 
@@ -26,17 +28,18 @@ class PanacheAuthorsRepository :
 
     @Entity(name = "AUTHOR")
     class AuthorEntity {
-        @Id var id: String? = null
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Long? = null
         lateinit var name: String
         lateinit var country: String
 
-        fun toDomain() = Author(id!!, name, country)
+        fun toDomain() = Author(id!!.toString(), name, country)
 
         companion object {
             fun fromDomain(author: Author): AuthorEntity {
                 val authorEntity = AuthorEntity()
                 with(authorEntity) {
-                    this.id = author.id
                     this.name = author.name
                     this.country = author.country
                 }

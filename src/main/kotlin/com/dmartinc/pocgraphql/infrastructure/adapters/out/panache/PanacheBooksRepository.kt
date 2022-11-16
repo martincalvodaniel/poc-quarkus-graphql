@@ -5,9 +5,11 @@ import com.dmartinc.pocgraphql.core.ports.BookRemover
 import com.dmartinc.pocgraphql.core.ports.BookRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksStore
-import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepositoryBase
+import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepository
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
 import javax.persistence.Id
 
 class PanacheBooksRepository :
@@ -15,11 +17,11 @@ class PanacheBooksRepository :
     BookRetriever,
     BooksRetriever,
     BooksStore,
-    PanacheRepositoryBase<PanacheBooksRepository.BookEntity, String> {
+    PanacheRepository<PanacheBooksRepository.BookEntity> {
 
-    override fun remove(id: String) = deleteById(id)
+    override fun remove(id: String) = deleteById(id.toLong())
 
-    override fun retrieveOne(id: String) = findById(id)?.toDomain()
+    override fun retrieveOne(id: String) = findById(id.toLong())?.toDomain()
 
     override fun retrieve(authorId: String?) = (authorId?.let { list("authorId", authorId) } ?: listAll()).toDomain()
 
@@ -30,7 +32,8 @@ class PanacheBooksRepository :
     @Entity(name = "BOOK")
     class BookEntity {
         @Id
-        var id: String? = null
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Long? = null
 
         var authorId: String? = null
 
@@ -43,7 +46,6 @@ class PanacheBooksRepository :
             fun fromDomain(book: Book): BookEntity {
                 val bookEntity = BookEntity()
                 with(bookEntity) {
-                    this.id = book.id
                     this.authorId = book.authorId
                     this.title = book.title
                     this.summary = book.summary
@@ -52,6 +54,6 @@ class PanacheBooksRepository :
             }
         }
 
-        fun toDomain() = Book(id!!, authorId!!, title, summary)
+        fun toDomain() = Book(id!!.toString(), authorId!!, title, summary)
     }
 }
