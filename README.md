@@ -18,7 +18,9 @@ This project uses [Quarkus](https://quarkus.io), the Supersonic Subatomic Java F
 
 ## Available GraphQL Queries
 
-Once the application has been started, the GraphQL api can be queried here: http://localhost:8080/q/graphql-ui
+Once the application has been started:
+    * the GraphQL api can be friendly queried at [graphql-ui](http://localhost:8080/q/graphql-ui)
+    * the GraphQL schema can be queried at [schema.graphql](http://localhost:8080/graphql/schema.graphql)
 
 ```
 # query{findAuthors{authors{id name country books{id authorId title summary}}}}
@@ -36,7 +38,7 @@ Executing this queries will result in request and responses as exposed in [graph
 
 ## Available Rest Endpoints
 
-Once the application has been started, the available rest endpoints can be used in
+Once the application has been started, the available rest endpoints can be used at
 [swagger](http://localhost:8080/q/documentation).
 
 [Postman](https://www.postman.com) collection can be imported too with this [openapi](http://localhost:8080/openapi)
