@@ -1,8 +1,8 @@
 package com.dmartinc.pocgraphql.infrastructure.adapters.out.panache
 
 import com.dmartinc.pocgraphql.core.Author
-import com.dmartinc.pocgraphql.core.ports.AuthorRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorRemover
+import com.dmartinc.pocgraphql.core.ports.AuthorRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorsRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorsStore
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepositoryBase
