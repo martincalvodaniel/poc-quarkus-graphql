@@ -1,6 +1,7 @@
 package com.dmartinc.pocgraphql.infrastructure.adapters.out.panache
 
 import com.dmartinc.pocgraphql.core.Author
+import com.dmartinc.pocgraphql.core.AuthorToCreate
 import com.dmartinc.pocgraphql.core.ports.AuthorRemover
 import com.dmartinc.pocgraphql.core.ports.AuthorRetriever
 import com.dmartinc.pocgraphql.core.ports.AuthorsRetriever
@@ -24,7 +25,7 @@ class PanacheAuthorsRepository :
 
     override fun retrieve() = listAll().map { it.toDomain() }.toList()
 
-    override fun store(author: Author) = persistAndFlush(AuthorEntity.fromDomain(author))
+    override fun store(authorToCreate: AuthorToCreate) = persistAndFlush(AuthorEntity.fromDomain(authorToCreate))
 
     @Entity(name = "AUTHOR")
     class AuthorEntity {
@@ -37,11 +38,11 @@ class PanacheAuthorsRepository :
         fun toDomain() = Author(id!!.toString(), name, country)
 
         companion object {
-            fun fromDomain(author: Author): AuthorEntity {
+            fun fromDomain(authorToCreate: AuthorToCreate): AuthorEntity {
                 val authorEntity = AuthorEntity()
                 with(authorEntity) {
-                    this.name = author.name
-                    this.country = author.country
+                    this.name = authorToCreate.name
+                    this.country = authorToCreate.country
                 }
                 return authorEntity
             }

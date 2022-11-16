@@ -18,7 +18,7 @@ class AuthorsRestResource(
 
     @Transactional
     @POST
-    fun createAuthor(author: AuthorDto): Response {
+    fun createAuthor(author: AuthorWithoutIdDto): Response {
         createAuthor.execute(author.toDomain())
         return Response.status(201).build()
     }

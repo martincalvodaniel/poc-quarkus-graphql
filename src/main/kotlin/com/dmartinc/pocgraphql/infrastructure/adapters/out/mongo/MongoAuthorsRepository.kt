@@ -1,6 +1,7 @@
 package com.dmartinc.pocgraphql.infrastructure.adapters.out.mongo
 
 import com.dmartinc.pocgraphql.core.Author
+import com.dmartinc.pocgraphql.core.AuthorToCreate
 import com.dmartinc.pocgraphql.core.Utils.NOT_YET_IMPLEMENTED
 import com.dmartinc.pocgraphql.core.ports.AuthorRemover
 import com.dmartinc.pocgraphql.core.ports.AuthorRetriever
@@ -25,7 +26,7 @@ class MongoAuthorsRepository :
         TODO(NOT_YET_IMPLEMENTED)
     }
 
-    override fun store(author: Author) {
+    override fun store(authorToCreate: AuthorToCreate) {
         TODO(NOT_YET_IMPLEMENTED)
     }
 }

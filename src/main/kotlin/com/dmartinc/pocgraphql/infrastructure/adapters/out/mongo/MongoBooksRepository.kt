@@ -1,6 +1,7 @@
 package com.dmartinc.pocgraphql.infrastructure.adapters.out.mongo
 
 import com.dmartinc.pocgraphql.core.Book
+import com.dmartinc.pocgraphql.core.BookToCreate
 import com.dmartinc.pocgraphql.core.Utils.NOT_YET_IMPLEMENTED
 import com.dmartinc.pocgraphql.core.ports.BookRemover
 import com.dmartinc.pocgraphql.core.ports.BookRetriever
@@ -25,7 +26,7 @@ class MongoBooksRepository :
         TODO(NOT_YET_IMPLEMENTED)
     }
 
-    override fun store(book: Book) {
+    override fun store(bookToCreate: BookToCreate) {
         TODO(NOT_YET_IMPLEMENTED)
     }
 }

@@ -1,7 +1,7 @@
 package com.dmartinc.pocgraphql.core.ports
 
-import com.dmartinc.pocgraphql.core.Book
+import com.dmartinc.pocgraphql.core.BookToCreate
 
 interface BooksStore {
-    fun store(book: Book)
+    fun store(bookToCreate: BookToCreate)
 }

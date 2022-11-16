@@ -20,7 +20,7 @@ class BooksGraphQLResource(
 
     @Transactional
     @Mutation
-    fun createBook(book: BookDto): Boolean {
+    fun createBook(book: BookToCreateDto): Boolean {
         createBook.execute(book.toDomain())
         return true
     }
@@ -39,6 +39,6 @@ class BooksGraphQLResource(
     fun findBooks(): BooksDto = BooksDto.fromDomain(findBooks.query())
 
     @Query("books")
-    fun findBooksForAuthor(@Source authorDto: AuthorDto): List<BookDto> =
-        findBooks.query(authorDto.id!!).map { BookDto.fromDomain(it) }
+    fun findBooksForAuthor(@Source author: AuthorDto): List<BookDto> =
+        findBooks.query(author.id!!).map { BookDto.fromDomain(it) }
 }

@@ -19,8 +19,8 @@ class AuthorBooksRestResource(
 
     @Transactional
     @POST
-    fun createBook(@PathParam("authorId") authorId: String, bookWithoutAuthor: BookWithoutAuthor): Response {
-        createBook.execute(bookWithoutAuthor.toDomain(authorId))
+    fun createBook(@PathParam("authorId") authorId: String, book: BookWithoutIdNorAuthor): Response {
+        createBook.execute(book.toDomain(authorId))
         return Response.status(201).build()
     }
 

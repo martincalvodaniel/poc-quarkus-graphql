@@ -1,15 +1,15 @@
 package com.dmartinc.pocgraphql.infrastructure.adapters.`in`.rest
 
 import com.dmartinc.pocgraphql.core.Author
+import com.dmartinc.pocgraphql.core.AuthorToCreate
 import com.dmartinc.pocgraphql.core.Book
+import com.dmartinc.pocgraphql.core.BookToCreate
 
 data class AuthorDto(
     val id: String,
     val name: String,
     val country: String
 ) {
-    fun toDomain() = Author(id, name, country)
-
     companion object {
         fun fromDomain(author: Author) =
             AuthorDto(
@@ -24,6 +24,8 @@ data class AuthorWithoutIdDto(
     val name: String,
     val country: String
 ) {
+    fun toDomain() = AuthorToCreate(name, country)
+
     companion object {
         fun fromDomain(author: Author) =
             AuthorWithoutIdDto(
@@ -39,27 +41,21 @@ data class AuthorsDto(val authors: List<AuthorDto>) {
     }
 }
 
-data class BookDto(
-    var id: String,
-    var authorId: String,
-    var title: String,
-    var summary: String
-) {
-
-    fun toDomain() = Book(id, authorId, title, summary)
-}
-
 data class BookWithoutAuthor(
     var id: String,
     var title: String,
     var summary: String
 ) {
-
-    fun toDomain(authorId: String) = Book(id, authorId, title, summary)
-
     companion object {
         fun fromDomain(book: Book) = BookWithoutAuthor(book.id, book.title, book.summary)
     }
+}
+
+data class BookWithoutIdNorAuthor(
+    var title: String,
+    var summary: String
+) {
+    fun toDomain(authorId: String) = BookToCreate(authorId, title, summary)
 }
 
 data class BookWithoutIdDto(
@@ -67,6 +63,8 @@ data class BookWithoutIdDto(
     var title: String,
     var summary: String
 ) {
+    fun toDomain() = BookToCreate(authorId, title, summary)
+
     companion object {
         fun fromDomain(book: Book) = BookWithoutIdDto(book.authorId, book.title, book.summary)
     }

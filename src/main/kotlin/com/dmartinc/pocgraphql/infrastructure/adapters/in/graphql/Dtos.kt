@@ -1,7 +1,18 @@
 package com.dmartinc.pocgraphql.infrastructure.adapters.`in`.graphql
 
 import com.dmartinc.pocgraphql.core.Author
+import com.dmartinc.pocgraphql.core.AuthorToCreate
 import com.dmartinc.pocgraphql.core.Book
+import com.dmartinc.pocgraphql.core.BookToCreate
+
+data class AuthorToCreateDto(
+    var name: String? = null,
+    var country: String? = null
+) {
+    constructor() : this(null)
+
+    fun toDomain() = AuthorToCreate(name!!, country!!)
+}
 
 data class AuthorDto(
     var id: String? = null,
@@ -9,8 +20,6 @@ data class AuthorDto(
     var country: String? = null
 ) {
     constructor() : this(null)
-
-    fun toDomain() = Author(id!!, name!!, country!!)
 
     companion object {
         fun fromDomain(author: Author) =
@@ -24,6 +33,16 @@ data class AuthorsDto(var authors: List<AuthorDto>) {
     }
 }
 
+data class BookToCreateDto(
+    var authorId: String? = null,
+    var title: String? = null,
+    var summary: String? = null
+) {
+    constructor() : this(null)
+
+    fun toDomain() = BookToCreate(authorId!!, title!!, summary!!)
+}
+
 data class BookDto(
     var id: String? = null,
     var authorId: String? = null,
@@ -31,8 +50,6 @@ data class BookDto(
     var summary: String? = null
 ) {
     constructor() : this(null)
-
-    fun toDomain() = Book(id!!, authorId!!, title!!, summary!!)
 
     companion object {
         fun fromDomain(book: Book) = BookDto(book.id, book.authorId, book.title, book.summary)

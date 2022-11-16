@@ -1,6 +1,7 @@
 package com.dmartinc.pocgraphql.infrastructure.adapters.out.panache
 
 import com.dmartinc.pocgraphql.core.Book
+import com.dmartinc.pocgraphql.core.BookToCreate
 import com.dmartinc.pocgraphql.core.ports.BookRemover
 import com.dmartinc.pocgraphql.core.ports.BookRetriever
 import com.dmartinc.pocgraphql.core.ports.BooksRetriever
@@ -25,7 +26,7 @@ class PanacheBooksRepository :
 
     override fun retrieve(authorId: String?) = (authorId?.let { list("authorId", authorId) } ?: listAll()).toDomain()
 
-    override fun store(book: Book) = persistAndFlush(BookEntity.fromDomain(book))
+    override fun store(bookToCreate: BookToCreate) = persistAndFlush(BookEntity.fromDomain(bookToCreate))
 
     private fun List<BookEntity>.toDomain() = map { it.toDomain() }
 
@@ -43,12 +44,12 @@ class PanacheBooksRepository :
         lateinit var summary: String
 
         companion object {
-            fun fromDomain(book: Book): BookEntity {
+            fun fromDomain(bookToCreate: BookToCreate): BookEntity {
                 val bookEntity = BookEntity()
                 with(bookEntity) {
-                    this.authorId = book.authorId
-                    this.title = book.title
-                    this.summary = book.summary
+                    this.authorId = bookToCreate.authorId
+                    this.title = bookToCreate.title
+                    this.summary = bookToCreate.summary
                 }
                 return bookEntity
             }

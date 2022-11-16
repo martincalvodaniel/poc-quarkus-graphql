@@ -18,8 +18,8 @@ class BooksRestResource(
 
     @Transactional
     @POST
-    fun createBook(bookDto: BookDto): Response {
-        createBook.execute(bookDto.toDomain())
+    fun createBook(book: BookWithoutIdDto): Response {
+        createBook.execute(book.toDomain())
         return Response.status(201).build()
     }
 

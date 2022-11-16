@@ -19,7 +19,7 @@ class AuthorsGraphQLResource(
 
     @Transactional
     @Mutation
-    fun createAuthor(author: AuthorDto): Boolean {
+    fun createAuthor(author: AuthorToCreateDto): Boolean {
         createAuthor.execute(author.toDomain())
         return true
     }

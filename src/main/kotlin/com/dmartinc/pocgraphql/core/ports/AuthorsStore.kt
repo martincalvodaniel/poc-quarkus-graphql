@@ -1,7 +1,7 @@
 package com.dmartinc.pocgraphql.core.ports
 
-import com.dmartinc.pocgraphql.core.Author
+import com.dmartinc.pocgraphql.core.AuthorToCreate
 
 interface AuthorsStore {
-    fun store(author: Author)
+    fun store(authorToCreate: AuthorToCreate)
 }
