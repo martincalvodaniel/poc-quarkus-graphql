@@ -1,25 +1,37 @@
 # poc-quarkus-graphql Project
 
-Proof of concept of a graphql api which queries an in-memory H2 database populated at startup.
+This project started as a `Proof of concept of a graphql api which queries an in-memory H2 database populated at
+startup.` but it has evolved into:
+* A demonstration of Hexagonal Architecture (obviously from my point of view and with some very simple use cases)
+* Additional to the GraphQL layer, a RESTful API has been implemented as a new port-in to the application logic
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
-
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+This project uses [Quarkus](https://quarkus.io), the Supersonic Subatomic Java Framework.
 
 ## Available GraphQL Queries
+
+Once the application has been started, the GraphQL api can be queried here: http://localhost:8080/q/graphql-ui
+
 ```
 # query{findAuthors{authors{id name country books{id authorId title summary}}}}
 # query{findAuthor(id: "1"){id name country books{id authorId title summary}}}
-# mutation{createAuthor(author:{id:"4", name:"author4", country:"author4Country"})}
+# mutation{createAuthor(author:{name:"author4", country:"author4Country"})}
 # mutation{deleteAuthor(id: "3")}
 
 # query{findBooks{books{id authorId title summary}}}
 # query{findBook(id: "1"){id authorId title summary}}
-# mutation{createBook(book:{id:"6", authorId:"1", title:"author1book6Title", summary:"author1book6Summary"})}
+# mutation{createBook(book:{authorId:"1", title:"author1book6Title", summary:"author1book6Summary"})}
 # mutation{deleteBook(id: "5")}
 ```
 
-Once the application has been started, the GraphQL api can be queried here: http://localhost:8080/q/graphql-ui
+Executing this queries will result in request and responses as exposed in [graphQLQueries](doc/graphQLQueries.md).
+
+## Available Rest Endpoints
+
+Once the application has been started, the available rest endpoints can be used in
+[swagger](http://localhost:8080/q/documentation).
+
+[Postman](https://www.postman.com) collection can be imported too with this [openapi](http://localhost:8080/openapi)
+file.
 
 ## Running the application in dev mode
 
