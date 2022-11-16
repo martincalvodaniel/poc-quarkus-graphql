@@ -1,9 +1,18 @@
 # poc-quarkus-graphql Project
 
+<p align="center">
+  <a href="https://gradle.org"><img src="https://img.shields.io/badge/Gradle-022E38?style=for-the-badge"></a>
+  <a href="https://kotlinlang.org"><img src="https://img.shields.io/badge/Kotlin-E77825?style=for-the-badge"></a>
+  <a href="https://quarkus.io"><img src="https://img.shields.io/badge/Quarkus-091213?style=for-the-badge"></a>
+  <a href="https://graphql.org"><img src="https://img.shields.io/badge/GraphQL-D932A2?style=for-the-badge"></a>
+
+[//]: # (  <a href="https://www.mongodb.com"><img src="https://img.shields.io/badge/MongoDB-81C564?style=for-the-badge"></a>)
+</p>
+
 This project started as a `Proof of concept of a graphql api which queries an in-memory H2 database populated at
 startup.` but it has evolved into:
 * A demonstration of Hexagonal Architecture (obviously from my point of view and with some very simple use cases)
-* Additional to the GraphQL layer, a RESTful API has been implemented as a new port-in to the application logic
+* Additional to the GraphQL layer, a RESTful API has been implemented as a new port-in to the application logic 
 
 This project uses [Quarkus](https://quarkus.io), the Supersonic Subatomic Java Framework.
 
