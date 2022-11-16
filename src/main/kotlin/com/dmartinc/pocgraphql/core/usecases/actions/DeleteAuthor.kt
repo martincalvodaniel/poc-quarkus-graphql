@@ -5,7 +5,7 @@ import com.dmartinc.pocgraphql.core.ports.AuthorRemover
 
 class DeleteAuthor(private val authorRemover: AuthorRemover) {
 
-    fun execute(authorId: Int) {
+    fun execute(authorId: String) {
         if (authorRemover.remove(authorId).not()) {
             throw AuthorNotFound(authorId)
         }

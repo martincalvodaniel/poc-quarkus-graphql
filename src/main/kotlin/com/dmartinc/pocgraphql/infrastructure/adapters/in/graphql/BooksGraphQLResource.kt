@@ -27,13 +27,13 @@ class BooksGraphQLResource(
 
     @Transactional
     @Mutation
-    fun deleteBook(id: Int): Boolean {
+    fun deleteBook(id: String): Boolean {
         deleteBook.execute(id)
         return true
     }
 
     @Query
-    fun findBook(id: Int): BookDto = findBook.query(id).let { BookDto.fromDomain(it) }
+    fun findBook(id: String): BookDto = findBook.query(id).let { BookDto.fromDomain(it) }
 
     @Query
     fun findBooks(): BooksDto = BooksDto.fromDomain(findBooks.query())

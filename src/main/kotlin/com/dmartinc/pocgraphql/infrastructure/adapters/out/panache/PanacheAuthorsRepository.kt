@@ -14,11 +14,11 @@ class PanacheAuthorsRepository :
     AuthorsRetriever,
     AuthorRetriever,
     AuthorsStore,
-    PanacheRepositoryBase<PanacheAuthorsRepository.AuthorEntity, Int> {
+    PanacheRepositoryBase<PanacheAuthorsRepository.AuthorEntity, String> {
 
-    override fun remove(id: Int) = deleteById(id)
+    override fun remove(id: String) = deleteById(id)
 
-    override fun retrieve(id: Int) = findById(id)?.toDomain()
+    override fun retrieve(id: String) = findById(id)?.toDomain()
 
     override fun retrieve() = listAll().map { it.toDomain() }.toList()
 
@@ -26,7 +26,7 @@ class PanacheAuthorsRepository :
 
     @Entity(name = "AUTHOR")
     class AuthorEntity {
-        @Id var id: Int? = null
+        @Id var id: String? = null
         lateinit var name: String
         lateinit var country: String
 

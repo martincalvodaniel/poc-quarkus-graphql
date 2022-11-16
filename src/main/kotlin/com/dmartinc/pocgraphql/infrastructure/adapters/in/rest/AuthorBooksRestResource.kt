@@ -19,13 +19,13 @@ class AuthorBooksRestResource(
 
     @Transactional
     @POST
-    fun createBook(@PathParam("authorId") authorId: Int, bookWithoutAuthor: BookWithoutAuthor): Response {
+    fun createBook(@PathParam("authorId") authorId: String, bookWithoutAuthor: BookWithoutAuthor): Response {
         createBook.execute(bookWithoutAuthor.toDomain(authorId))
         return Response.status(201).build()
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    fun findBooksByAuthorId(@PathParam("authorId") authorId: Int): BooksByAuthorIdDto =
+    fun findBooksByAuthorId(@PathParam("authorId") authorId: String): BooksByAuthorIdDto =
         BooksByAuthorIdDto.fromDomain(findBooks.query(authorId))
 }

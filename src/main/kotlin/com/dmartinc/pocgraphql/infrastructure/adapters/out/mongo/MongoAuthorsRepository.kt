@@ -13,7 +13,7 @@ class MongoAuthorsRepository :
     AuthorRetriever,
     AuthorsStore {
 
-    override fun remove(id: Int): Boolean {
+    override fun remove(id: String): Boolean {
         TODO(NOT_YET_IMPLEMENTED)
     }
 
@@ -21,7 +21,7 @@ class MongoAuthorsRepository :
         TODO(NOT_YET_IMPLEMENTED)
     }
 
-    override fun retrieve(id: Int): Author? {
+    override fun retrieve(id: String): Author? {
         TODO(NOT_YET_IMPLEMENTED)
     }
 

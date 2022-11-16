@@ -13,15 +13,15 @@ class MongoBooksRepository :
     BooksRetriever,
     BooksStore {
 
-    override fun remove(id: Int): Boolean {
+    override fun remove(id: String): Boolean {
         TODO(NOT_YET_IMPLEMENTED)
     }
 
-    override fun retrieveOne(id: Int): Book? {
+    override fun retrieveOne(id: String): Book? {
         TODO(NOT_YET_IMPLEMENTED)
     }
 
-    override fun retrieve(authorId: Int?): List<Book> {
+    override fun retrieve(authorId: String?): List<Book> {
         TODO(NOT_YET_IMPLEMENTED)
     }
 

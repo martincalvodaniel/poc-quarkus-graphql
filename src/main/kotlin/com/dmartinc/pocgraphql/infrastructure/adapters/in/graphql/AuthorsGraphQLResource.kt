@@ -26,13 +26,13 @@ class AuthorsGraphQLResource(
 
     @Transactional
     @Mutation
-    fun deleteAuthor(id: Int): Boolean {
+    fun deleteAuthor(id: String): Boolean {
         deleteAuthor.execute(id)
         return true
     }
 
     @Query
-    fun findAuthor(id: Int): AuthorDto = findAuthor.query(id).let { AuthorDto.fromDomain(it) }
+    fun findAuthor(id: String): AuthorDto = findAuthor.query(id).let { AuthorDto.fromDomain(it) }
 
     @Query
     fun findAuthors(): AuthorsDto = AuthorsDto.fromDomain(findAuthors.query())

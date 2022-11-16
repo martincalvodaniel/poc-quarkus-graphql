@@ -8,15 +8,15 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 ## Available GraphQL Queries
 ```
-# query{findAuthors{authors{id name country books{id author title summary}}}}
-# query{findAuthor(id: 1){id name country books{id author title summary}}}}
-# mutation{createAuthor(author:{id: 4, name:"name", country:"country"})}
-# mutation{deleteAuthor(id: 1)}
+# query{findAuthors{authors{id name country books{id authorId title summary}}}}
+# query{findAuthor(id: "1"){id name country books{id authorId title summary}}}
+# mutation{createAuthor(author:{id:"4", name:"author4", country:"author4Country"})}
+# mutation{deleteAuthor(id: "3")}
 
-# query{findBooks{books{id author title summary}}}
-# query{findBook(id: 1){id author title summary}}
-# mutation{createBook(book:{id: 6, author:1, title:"title", summary:"summary"})}
-# mutation{deleteBook(id: 1)}
+# query{findBooks{books{id authorId title summary}}}
+# query{findBook(id: "1"){id authorId title summary}}
+# mutation{createBook(book:{id:"6", authorId:"1", title:"author1book6Title", summary:"author1book6Summary"})}
+# mutation{deleteBook(id: "5")}
 ```
 
 Once the application has been started, the GraphQL api can be queried here: http://localhost:8080/q/graphql-ui

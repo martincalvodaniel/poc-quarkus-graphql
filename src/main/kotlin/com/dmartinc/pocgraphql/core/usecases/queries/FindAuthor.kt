@@ -6,7 +6,7 @@ import com.dmartinc.pocgraphql.core.ports.AuthorRetriever
 
 class FindAuthor(private val authorRetriever: AuthorRetriever) {
 
-    fun query(authorId: Int): Author =
+    fun query(authorId: String): Author =
         authorRetriever.retrieve(authorId)
             ?: throw AuthorNotFound(authorId)
 }

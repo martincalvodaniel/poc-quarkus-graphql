@@ -19,12 +19,12 @@ class BookRestResource(
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    fun findBook(@PathParam("id") id: Int): BookWithoutIdDto = BookWithoutIdDto.fromDomain(findBook.query(id))
+    fun findBook(@PathParam("id") id: String): BookWithoutIdDto = BookWithoutIdDto.fromDomain(findBook.query(id))
 
     @Transactional
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    fun deleteBook(@PathParam("id") id: Int): Response {
+    fun deleteBook(@PathParam("id") id: String): Response {
         deleteBook.execute(id)
         return Response.status(Response.Status.NO_CONTENT).build()
     }

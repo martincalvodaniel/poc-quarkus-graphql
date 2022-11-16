@@ -15,13 +15,13 @@ class PanacheBooksRepository :
     BookRetriever,
     BooksRetriever,
     BooksStore,
-    PanacheRepositoryBase<PanacheBooksRepository.BookEntity, Int> {
+    PanacheRepositoryBase<PanacheBooksRepository.BookEntity, String> {
 
-    override fun remove(id: Int) = deleteById(id)
+    override fun remove(id: String) = deleteById(id)
 
-    override fun retrieveOne(id: Int) = findById(id)?.toDomain()
+    override fun retrieveOne(id: String) = findById(id)?.toDomain()
 
-    override fun retrieve(authorId: Int?) = (authorId?.let { list("author", authorId) } ?: listAll()).toDomain()
+    override fun retrieve(authorId: String?) = (authorId?.let { list("authorId", authorId) } ?: listAll()).toDomain()
 
     override fun store(book: Book) = persistAndFlush(BookEntity.fromDomain(book))
 
@@ -30,9 +30,9 @@ class PanacheBooksRepository :
     @Entity(name = "BOOK")
     class BookEntity {
         @Id
-        var id: Int? = null
+        var id: String? = null
 
-        var author: Int? = null
+        var authorId: String? = null
 
         lateinit var title: String
 
@@ -44,7 +44,7 @@ class PanacheBooksRepository :
                 val bookEntity = BookEntity()
                 with(bookEntity) {
                     this.id = book.id
-                    this.author = book.author
+                    this.authorId = book.authorId
                     this.title = book.title
                     this.summary = book.summary
                 }
@@ -52,6 +52,6 @@ class PanacheBooksRepository :
             }
         }
 
-        fun toDomain() = Book(id!!, author!!, title, summary)
+        fun toDomain() = Book(id!!, authorId!!, title, summary)
     }
 }

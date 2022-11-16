@@ -19,11 +19,12 @@ class AuthorRestResource(
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    fun findAuthor(@PathParam("id") id: Int): AuthorWithoutIdDto = AuthorWithoutIdDto.fromDomain(findAuthor.query(id))
+    fun findAuthor(@PathParam("id") id: String): AuthorWithoutIdDto =
+        AuthorWithoutIdDto.fromDomain(findAuthor.query(id))
 
     @Transactional
     @DELETE
-    fun deleteAuthor(@PathParam("id") id: Int): Response {
+    fun deleteAuthor(@PathParam("id") id: String): Response {
         deleteAuthor.execute(id)
         return Response.noContent().build()
     }

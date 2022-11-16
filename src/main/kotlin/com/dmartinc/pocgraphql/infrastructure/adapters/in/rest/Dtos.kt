@@ -4,7 +4,7 @@ import com.dmartinc.pocgraphql.core.Author
 import com.dmartinc.pocgraphql.core.Book
 
 data class AuthorDto(
-    val id: Int,
+    val id: String,
     val name: String,
     val country: String
 ) {
@@ -40,22 +40,22 @@ data class AuthorsDto(val authors: List<AuthorDto>) {
 }
 
 data class BookDto(
-    var id: Int,
-    var author: Int,
+    var id: String,
+    var authorId: String,
     var title: String,
     var summary: String
 ) {
 
-    fun toDomain() = Book(id, author, title, summary)
+    fun toDomain() = Book(id, authorId, title, summary)
 }
 
 data class BookWithoutAuthor(
-    var id: Int,
+    var id: String,
     var title: String,
     var summary: String
 ) {
 
-    fun toDomain(author: Int) = Book(id, author, title, summary)
+    fun toDomain(authorId: String) = Book(id, authorId, title, summary)
 
     companion object {
         fun fromDomain(book: Book) = BookWithoutAuthor(book.id, book.title, book.summary)
@@ -63,23 +63,23 @@ data class BookWithoutAuthor(
 }
 
 data class BookWithoutIdDto(
-    var author: Int,
+    var authorId: String,
     var title: String,
     var summary: String
 ) {
     companion object {
-        fun fromDomain(book: Book) = BookWithoutIdDto(book.author, book.title, book.summary)
+        fun fromDomain(book: Book) = BookWithoutIdDto(book.authorId, book.title, book.summary)
     }
 }
 
 data class BookWithoutSummaryDto(
-    var id: Int,
+    var id: String,
     var title: String,
-    var author: Int
+    var authorId: String
 ) {
 
     companion object {
-        fun fromDomain(book: Book) = BookWithoutSummaryDto(book.id, book.title, book.author)
+        fun fromDomain(book: Book) = BookWithoutSummaryDto(book.id, book.title, book.authorId)
     }
 }
 

@@ -5,5 +5,5 @@ import com.dmartinc.pocgraphql.core.ports.BooksRetriever
 
 class FindBooks(private val booksRetriever: BooksRetriever) {
 
-    fun query(authorId: Int? = null): List<Book> = booksRetriever.retrieve(authorId)
+    fun query(authorId: String? = null): List<Book> = booksRetriever.retrieve(authorId)
 }
